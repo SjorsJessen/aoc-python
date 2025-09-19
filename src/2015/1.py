@@ -1,5 +1,7 @@
 # --- Day 1: Not Quite Lisp ---
 
+# --- Part One ---
+
 # Santa is trying to deliver presents in a large apartment building,
 # but he can't find the right floor - the directions he got are a little confusing.
 # He starts on the ground floor (floor 0) and then follows the instructions one character at a time.
@@ -18,13 +20,42 @@
 
 # To what floor do the instructions take Santa?
 
+# --- Part Two ---
+
+# Now, given the same instructions, find the position of the first character that causes him to enter the basement (floor -1).
+# The first character in the instructions has position 1, the second character has position 2, and so on.
+
+# For example:
+
+#     ) causes him to enter the basement at character position 1.
+#     ()()) causes him to enter the basement at character position 5.
+
+# What is the position of the character that causes Santa to first enter the basement?
+
 from pathlib import Path
 
 from src.utils.filehandler import INPUT_2015, FileHandler
 
 
+def __second_puzzle(input: str) -> None:
+    current_level: int = 0
+    directions: dict[str, int] = {
+        "(": 1,
+        ")": -1,
+    }
+
+    for idx, char in enumerate(input):
+        direction: int = directions[char]
+        current_level += direction
+
+        if current_level == -1:
+            basement_entry: int = idx + 1
+            print(basement_entry)
+            break
+
+
 def __first_puzzle(input: str) -> None:
-    starting_point: int = 0
+    current_level: int = 0
     directions: dict[str, int] = {
         "(": 1,
         ")": -1,
@@ -32,8 +63,8 @@ def __first_puzzle(input: str) -> None:
 
     for char in input:
         direction: int = directions[char]
-        starting_point += direction
-    print(starting_point)
+        current_level += direction
+    print(current_level)
 
 
 if __name__ == "__main__":
@@ -41,3 +72,4 @@ if __name__ == "__main__":
     input: str = FileHandler.read(file_path=file_path)
 
     __first_puzzle(input=input)
+    __second_puzzle(input=input)
