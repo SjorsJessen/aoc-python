@@ -16,3 +16,11 @@ class FileHandler:
             contents: str = file.read()
 
         return contents
+
+    @staticmethod
+    def read_lines(file_path: Path) -> list[str]:
+        """Read the contents of a file."""
+        with Path.open(file_path, encoding="utf-8") as file:
+            contents: list[str] = file.readlines()
+
+        return contents

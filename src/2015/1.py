@@ -39,6 +39,7 @@ from src.utils.filehandler import INPUT_2015, FileHandler
 
 def __second_puzzle(input: str) -> None:
     current_level: int = 0
+    basement: int = -1
     directions: dict[str, int] = {
         "(": 1,
         ")": -1,
@@ -48,7 +49,7 @@ def __second_puzzle(input: str) -> None:
         direction: int = directions[char]
         current_level += direction
 
-        if current_level == -1:
+        if current_level == basement:
             basement_entry: int = idx + 1
             print(basement_entry)
             break
