@@ -1,0 +1,137 @@
+[project]
+name = "advent-of-code-python"
+description = "Advent of Code solutions in Python"
+version = "0.1.0"
+
+requires-python = ">=3.12"
+
+
+[tool.mypy]
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+enable_error_code = "ignore-without-code"
+strict = true
+follow_imports = "normal"
+implicit_reexport = true
+explicit_package_bases = true
+mypy_path = "."
+namespace_packages = true
+
+ignore_missing_imports = true
+check_untyped_defs = true
+no_implicit_optional = true
+
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = true
+
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_any_generics = false
+disallow_subclassing_any = true
+disallow_untyped_decorators = true
+disallow_untyped_calls = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+
+[tool.ruff]
+lint.select = [
+    "ASYNC",
+    "C90",
+    "COM",
+    "D",
+    "E",
+    "ERA",
+    "F",
+    "FURB",
+    "I",
+    "N",
+    "PL",
+    "PT",
+    "PTH",
+    "RUF",
+    "S",
+    "SLF",
+    "SIM",
+    "T20",
+    "TRY",
+    "UP",
+    "W",
+]
+extend-include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+line-length = 120
+lint.fixable = ["ALL"]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "venv",
+]
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+fix = true
+unsafe-fixes = true
+preview = true
+lint.ignore = [
+    'COM812',
+    'COM819',
+    'D206',
+    'E111',
+    'E114',
+    'E117',
+    'E501',
+    'W191',
+    'PLR0913',
+    'PLR0917',
+    'N806',
+    'TRY003',
+]
+output-format = "grouped"
+
+[tool.ruff.lint.per-file-ignores]
+"*/test_*.py" = ["S101", "SLF001"]
+"*/conftest.py" = ["SLF001"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.pylint]
+max-public-methods = 30
+max-locals = 25
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+
+
+[tool.vulture]
+make_whitelist = true
+min_confidence = 100
+sort_by_size = true
+verbose = false
+
+
+[tool.pip-tools]
+output-file = "requirements.txt"
+upgrade = true
+strip-extras = true
+allow-unsafe = false
+unsafe-package = ["jupyter-server"]

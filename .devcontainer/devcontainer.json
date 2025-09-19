@@ -1,0 +1,40 @@
+{
+    "name": "Advent of Code Python Dev Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "workspace",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-azuretools.vscode-docker",
+                "github.copilot",
+                "github.copilot-chat",
+                "tamasfe.even-better-toml",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.mypyEnabled": true,
+                "python.linting.mypyPath": "/usr/local/bin/mypy",
+                "editor.formatOnSave": true,
+                "ruff.enable": true,
+                "ruff.path": ["/usr/local/bin/ruff"],
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.python",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "explicit",
+                        "source.organizeImports.ruff": "explicit"
+                    }
+                }
+            }
+        }
+    },
+    "remoteEnv": {
+        "PYTHONPATH": "/workspace/python"
+    },
+    "postCreateCommand": "/bin/bash -c 'chmod +x .devcontainer/post-create.sh && .devcontainer/post-create.sh'"
+}

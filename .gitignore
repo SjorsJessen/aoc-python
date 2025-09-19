@@ -1,0 +1,16 @@
+__pycache__
+
+*.log
+*.tmp
+*.py[cod]
+*.so
+*.env
+
+.vscode/
+.idea/
+
+.DS_Store
+Desktop.ini
+
+Thumbs.db
+ehthumbs.db
