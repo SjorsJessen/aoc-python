@@ -34,7 +34,7 @@
         }
     },
     "remoteEnv": {
-        "PYTHONPATH": "/workspace/python"
+        "PYTHONPATH": "/workspace"
     },
     "postCreateCommand": "/bin/bash -c 'chmod +x .devcontainer/post-create.sh && .devcontainer/post-create.sh'"
 }

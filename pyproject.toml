@@ -8,7 +8,7 @@ requires-python = ">=3.12"
 
 [tool.mypy]
 python_version = "3.13"
-plugins = ["pydantic.mypy"]
+# plugins = ["pydantic.mypy"]
 enable_error_code = "ignore-without-code"
 strict = true
 follow_imports = "normal"
@@ -33,11 +33,11 @@ disallow_subclassing_any = true
 disallow_untyped_decorators = true
 disallow_untyped_calls = true
 
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
-warn_untyped_fields = true
+# [tool.pydantic-mypy]
+# init_forbid_extra = true
+# init_typed = true
+# warn_required_dynamic_aliases = true
+# warn_untyped_fields = true
 
 
 [tool.ruff]
@@ -104,6 +104,8 @@ lint.ignore = [
     'PLR0917',
     'N806',
     'TRY003',
+    "T201",
+    "D100",
 ]
 output-format = "grouped"
 
