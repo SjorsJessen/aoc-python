@@ -1,18 +1,9 @@
-from dataclasses import dataclass
 from pathlib import Path
 
 from utils.filehandler import INPUT_2015, FileHandler
 
 type Position = tuple[int, int]
-
-
-@dataclass
-class House:
-    """House object."""
-
-    position: Position
-    amount_of_presents: int
-
+type PresentCount = int
 
 directions: dict[str, Position] = {
     ">": (1, 0),
@@ -21,25 +12,19 @@ directions: dict[str, Position] = {
     "v": (0, -1),
 }
 
-if __name__ == "__main__":
-    file_path = Path(f"{INPUT_2015}/3.txt")
-    input: str = FileHandler.read(file_path=file_path)
 
-    houses: list[House] = []
-    pos_x: int = 0
-    pos_y: int = 0
+def __first_puzzle(input: str) -> None:
+    houses: dict[Position, PresentCount] = {}
+    current_pos: Position = (0, 0)
 
     for char in input:
-        new_pos: Position = directions[char]
-        pos_x += new_pos[0]
-        pos_y += new_pos[1]
-        current_pos: tuple[int, int] = (pos_x, pos_y)
+        next_pos: Position = directions[char]
+        current_pos = (current_pos[0] + next_pos[0], current_pos[1] + next_pos[1])
+        houses[current_pos] = houses.get(current_pos, 1)
+    print(len(houses))
 
-        if current_pos in [house.position for house in houses]:
-            house: House = next(house for house in houses if house.position == current_pos)
-            house.amount_of_presents += 1
-        else:
-            houses.append(House(position=current_pos, amount_of_presents=1))
 
-    total: int = len([house for house in houses if house.amount_of_presents >= 1])
-    print(total)
+if __name__ == "__main__":
+    file_path = Path(f"{INPUT_2015}/3.txt")
+    input: str = FileHandler.read(file_path=file_path).strip()
+    __first_puzzle(input=input)
