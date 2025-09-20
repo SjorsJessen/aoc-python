@@ -19,6 +19,25 @@
 
 # All numbers in the elves' list are in feet. How many total square feet of wrapping paper should they order?
 
+# --- Part Two ---
+
+# The elves are also running low on ribbon.
+# Ribbon is all the same width, so they only have to worry about the length they need to order, which they would again like to be exact.
+
+# The ribbon required to wrap a present is the shortest distance around its sides, or the smallest perimeter of any one face.
+# Each present also requires a bow made out of ribbon as well;
+# the feet of ribbon required for the perfect bow is equal to the cubic feet of volume of the present.
+# Don't ask how they tie the bow, though; they'll never tell.
+
+# For example:
+
+#     A present with dimensions 2x3x4 requires 2+2+3+3 = 10 feet of ribbon to wrap the present
+#     plus 2*3*4 = 24 feet of ribbon for the bow, for a total of 34 feet.
+#     A present with dimensions 1x1x10 requires 1+1+1+1 = 4 feet of ribbon to wrap the present
+#     plus 1*1*10 = 10 feet of ribbon for the bow, for a total of 14 feet.
+
+# How many total feet of ribbon should they order?
+
 
 from pathlib import Path
 
@@ -42,7 +61,29 @@ def __first_puzzle(input: list[str]) -> None:
     print(amount_of_paper)
 
 
+def __calculate(length: int, width: int, height: int) -> int:
+    feet_in_length: list[int] = [(length * 2), (height * 2)]
+    extra: int = length * width * height
+    product: int = sum(feet_in_length) + extra
+    return product
+
+
+def __second_puzzle(input: list[str]) -> None:
+    seperator: str = "x"
+    amount_of_ribbon: int = 0
+    for line in input:
+        length, width, height = line.rsplit(sep=seperator)
+        product: int = __calculate(int(length), int(width), int(height))
+        amount_of_ribbon += product
+    # too low: 3767150
+    # too high: 3798106
+    print(amount_of_ribbon)
+
+
 if __name__ == "__main__":
     file_path = Path(f"{INPUT_2015}/2.txt")
     input: list[str] = FileHandler.read_lines(file_path=file_path)
+    r = __calculate(2, 3, 4)
+    r = __calculate(1, 1, 10)
     __first_puzzle(input=input)
+    __second_puzzle(input=input)
