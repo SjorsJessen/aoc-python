@@ -15,7 +15,7 @@ class FileHandler:
         with Path.open(file_path, encoding="utf-8") as file:
             contents: str = file.read()
 
-        return contents
+        return contents.strip()
 
     @staticmethod
     def read_lines(file_path: Path) -> list[str]:

@@ -24,7 +24,25 @@ def __first_puzzle(input: str) -> None:
     print(len(houses))
 
 
+def __second_puzzle(input: str) -> None:
+    houses: dict[Position, PresentCount] = {}
+    santa_pos: Position = (0, 0)
+    robo_santa_pos: Position = (0, 0)
+
+    for idx, char in enumerate(input):
+        next_pos: Position = directions[char]
+        if idx % 2 == 0:
+            santa_pos = (santa_pos[0] + next_pos[0], santa_pos[1] + next_pos[1])
+            houses[santa_pos] = houses.get(santa_pos, 1)
+        else:
+            robo_santa_pos = (robo_santa_pos[0] + next_pos[0], robo_santa_pos[1] + next_pos[1])
+            houses[robo_santa_pos] = houses.get(robo_santa_pos, 1)
+
+    print(len(houses))
+
+
 if __name__ == "__main__":
     file_path = Path(f"{INPUT_2015}/3.txt")
-    input: str = FileHandler.read(file_path=file_path).strip()
+    input: str = FileHandler.read(file_path=file_path)
     __first_puzzle(input=input)
+    __second_puzzle(input=input)
