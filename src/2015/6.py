@@ -78,11 +78,7 @@ def __first_puzzle(lines: str) -> None:
         for position in grid_positions:
             if lights.get(position):
                 if instruction.state == "toggle":
-                    state: str = lights[position]
-                    if state == "on":
-                        lights[position] = "off"
-                    elif state == "off":
-                        lights[position] = "on"
+                    lights[position] = "on" if lights[position] == "off" else "off"
                 else:
                     lights[position] = instruction.state
             else:
