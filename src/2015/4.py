@@ -38,28 +38,29 @@ def __generate_numbers(start: int, end: int) -> Generator[int, Any, None]:
     yield from range(start, end)
 
 
+def __generate_hex(input: str, number: int) -> str:
+    value: str = f"{input}{number}"
+    hash = hashlib.md5(value.encode())  # noqa: S324
+    hex: str = hash.hexdigest()
+    return hex
+
+
 def __first_puzzle(input: str, prefix: str) -> None:
     for number in __generate_numbers(start=100_000, end=1_000_000):
-        value: str = f"{input}{number}"
-        hash = hashlib.md5(value.encode())  # noqa: S324
-        hex: str = hash.hexdigest()
+        hex: str = __generate_hex(input=input, number=number)
 
         if __has_trailing_zeroes(input=hex, prefix=prefix):
             char: str = hex[len(prefix)]
             if char.isdecimal() and __is_positive_number(int(char)):
-                print(f"Best result: {hex}")
-                print(f"With number: {number}")
+                print(f"Best result: {hex} from number: {number}")
 
 
 def __second_puzzle(input: str, prefix: str) -> None:
     for number in __generate_numbers(start=100_000, end=10_000_000):
-        value: str = f"{input}{number}"
-        hash = hashlib.md5(value.encode())  # noqa: S324
-        hex: str = hash.hexdigest()
+        hex: str = __generate_hex(input=input, number=number)
 
         if __has_trailing_zeroes(input=hex, prefix=prefix):
-            print(f"Best result: {hex}")
-            print(f"With number: {number}")
+            print(f"Best result: {hex} from number: {number}")
 
 
 if __name__ == "__main__":
